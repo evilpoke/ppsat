@@ -8,17 +8,21 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install gtest manually
-      run: sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp ./lib/*.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
+      run: ls & pwd & sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp ./lib/*.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
     - name: install emp
       run: |
+        ls
+        pwd
         wget https://raw.githubusercontent.com/emp-toolkit/emp-readme/master/scripts/install.py
         python3 install.py --deps --tool --ot --sh2pc
         sudo ldconfig      
     - name: Create Build Environment
-      run: ls && cmake . && make
+      run: pwd & ls && cmake . && make
     - name: Test Functionalities
       working-directory: ./test
       run: |
+       ls
+       pwd
        ./runTests.sh
   
   microevaluation:
