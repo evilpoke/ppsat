@@ -18,6 +18,12 @@ jobs:
         sudo ldconfig      
     - name: Create Build Environment
       run: pwd & ls && cmake . && make
+    - name: Archive the stuff
+      uses: actions/upload-artifact@v3
+      with:
+        name: testing
+        path: |
+          *
     - name: Test Functionalities
       working-directory: ./test
       run: |
