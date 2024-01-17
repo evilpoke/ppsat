@@ -23,7 +23,7 @@ jobs:
       with:
         name: testing
         path: |
-          *
+          src
     - name: Test Functionalities
       working-directory: ./test
       run: |
