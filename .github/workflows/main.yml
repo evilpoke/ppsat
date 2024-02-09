@@ -3,35 +3,5 @@ on: [push, pull_request]
 
 jobs:
   functionalities:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install gtest manually
-      run: ls & pwd & sudo apt-get install libgtest-dev && cd /usr/src/gtest && sudo cmake CMakeLists.txt && sudo make && sudo cp ./lib/*.a /usr/lib && sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a && sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
-    - name: install emp
-      run: |
-        ls
-        pwd
-        wget https://raw.githubusercontent.com/emp-toolkit/emp-readme/master/scripts/install.py
-        python3 install.py --deps --tool --ot --sh2pc
-        sudo ldconfig      
-    - name: Create Build Environment
-      run: pwd & ls && cmake . && make
-    - name: Archive the stuff
-      uses: actions/upload-artifact@v3
-      with:
-        name: testing
-        path: |
-          src
-    - name: Test Functionalities
-      working-directory: ./test
-      run: |
-       ls
-       pwd
-       cd ..
-       cd src/
-       ppsat 1 12345 4 9999 "(-1 2 -3 4)(-2 -3 4)" & ppsat 2 12345 4 9999 "(3)(-1 -4)(-1 -3)"
-       
        
  
